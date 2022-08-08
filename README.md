@@ -1,3 +1,6 @@
+[//]: # ([![Codacy Badge]&#40;https://app.codacy.com/project/badge/Grade/bee16f3145654047a0505c62aeefd8a2&#41;]&#40;https://www.codacy.com/gh/JavaWebinar/topjava/dashboard&#41;)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/bee16f3145654047a0505c62aeefd8a2)](https://www.codacy.com/gh/Gorassi/topjava/setting)
+
 Java Enterprise Online Project
 ===============================
 
