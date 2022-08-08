@@ -22,7 +22,7 @@ public class InMemoryAdminRestControllerSpringTest {
     @Autowired
     private AdminRestController controller;
 
-//    @Autowired
+ //   @Autowired
     private InMemoryUserRepository repository;
 
     @Before
