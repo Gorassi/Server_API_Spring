@@ -19,6 +19,8 @@ public class SpringMain {
         // java 7 automatic resource management (ARM)
         try (ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/inmemory.xml")) {
             System.out.println("Bean definition names: " + Arrays.toString(appCtx.getBeanDefinitionNames()));
+//            System.out.println("Bean definition names 1: ");
+//            Arrays.stream(appCtx.getBeanDefinitionNames()).sorted().forEach(System.out::println);
             AdminRestController adminUserController = appCtx.getBean(AdminRestController.class);
  //           adminUserController.create(new User(null, "userName", "email@mail.ru", "password", Role.USER));
             adminUserController.getAll().forEach(System.out::println);
