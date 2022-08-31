@@ -1,33 +1,61 @@
 package ru.javawebinar.topjava.repository.jpa;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.javawebinar.topjava.model.Meal;
+import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.MealRepository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
+@Transactional(readOnly = true)
 public class JpaMealRepository implements MealRepository {
 
+    @PersistenceContext
+    private EntityManager em;
+
     @Override
+    @Transactional
     public Meal save(Meal meal, int userId) {
-        return null;
+        meal.setUser(em.getReference(User.class, userId));
+        if(meal.isNew()){
+            em.persist(meal);
+            return meal;
+        }else {
+            return em.merge(meal);
+        }
     }
 
     @Override
+    @Transactional
     public boolean delete(int id, int userId) {
-        return false;
+        Meal meal = em.getReference(Meal.class, id);
+        System.out.println("meal for delete : " + meal);
+        em.remove(meal);
+        getAll(userId);
+ //       em.createQuery("delete from Meal m where m.id=:id");
+
+        System.out.println("Delete ? : " + !em.contains(meal));
+        return !em.contains(meal);
+
+//        Query query = em.createQuery("DELETE FROM User u WHERE u.id=:id");
+//        return query.setParameter("id", id).executeUpdate() != 0;
     }
 
     @Override
     public Meal get(int id, int userId) {
-        return null;
+        return em.find(Meal.class, id);
     }
 
     @Override
     public List<Meal> getAll(int userId) {
-        return null;
+        System.out.println("JpaMealRepository... method getAll()...");
+        return (List<Meal>) em.createQuery("SELECT m FROM Meal m").getResultList();
     }
 
     @Override

@@ -18,6 +18,7 @@ public class MealsUtil {
     }
 
     public static List<MealTo> getTos(Collection<Meal> meals, int caloriesPerDay) {
+        System.out.println("ln 21 MealsUtil... method getTos()...");
         return filterByPredicate(meals, caloriesPerDay, meal -> true);
     }
 

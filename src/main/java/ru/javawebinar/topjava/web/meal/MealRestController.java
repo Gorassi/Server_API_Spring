@@ -2,6 +2,7 @@ package ru.javawebinar.topjava.web.meal;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import ru.javawebinar.topjava.model.Meal;
@@ -29,7 +30,7 @@ public class MealRestController {
 
     public Meal get(int id) {
         int userId = SecurityUtil.authUserId();
-        log.info("get meal {} for user {}", id, userId);
+        log.info("... get meal {} for user {}", id, userId);
         return service.get(id, userId);
     }
 
@@ -42,6 +43,7 @@ public class MealRestController {
     public List<MealTo> getAll() {
         int userId = SecurityUtil.authUserId();
         log.info("getAll for user {}", userId);
+        System.out.println("MealRestController... method getAll()...ask MealsUtil.getTos...");
         return MealsUtil.getTos(service.getAll(userId), SecurityUtil.authUserCaloriesPerDay());
     }
 

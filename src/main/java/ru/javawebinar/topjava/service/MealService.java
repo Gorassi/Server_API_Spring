@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -35,6 +36,11 @@ public class MealService {
     }
 
     public List<Meal> getAll(int userId) {
+
+        System.out.println("MealService... method getAll()...");
+        System.out.println(repository==null);
+        List<Meal> list = repository.getAll(userId);
+        list.stream().forEach(System.out::println);
         return repository.getAll(userId);
     }
 
@@ -44,7 +50,9 @@ public class MealService {
     }
 
     public Meal create(Meal meal, int userId) {
+        System.out.println("MealService... method create... is meal null = " + meal==null + " userId = " + userId);
         Assert.notNull(meal, "meal must not be null");
         return repository.save(meal, userId);
     }
+
 }

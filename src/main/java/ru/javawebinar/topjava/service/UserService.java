@@ -1,5 +1,7 @@
 package ru.javawebinar.topjava.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.javawebinar.topjava.model.User;
@@ -12,6 +14,7 @@ import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
 public class UserService {
+    protected final Logger log = LoggerFactory.getLogger(getClass());
 
     private final UserRepository repository;
 
@@ -38,7 +41,10 @@ public class UserService {
     }
 
     public List<User> getAll() {
-        return repository.getAll();
+        log.info("... UserService... method getAll()...");
+        List<User> list = repository.getAll();
+        log.info("size = " + list.size());
+        return list;
     }
 
     public void update(User user) {
